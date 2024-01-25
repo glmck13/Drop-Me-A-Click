@@ -1,0 +1,81 @@
+<!--#include virtual="/sercomm/header.html" -->
+<div style="width: 1000px;">
+<h2>Questions you may be asking...</h2>
+<h4><i>How do I sign up (subscribe) to the service?</i></h4>
+<blockquote>
+You need two things to subscribe: a Sercomm button, and an email address.  The Subscribe page first walks you through the steps for AWS IoT 1-Click to “claim” your button, after which you'll be emailed an initial login password so you can finish configuring the app.
+</blockquote>
+<h4><i>How much does the service cost?</i></h4>
+<blockquote>
+At this time the service is free, and I'm looking to recruit folks to give it a test drive. Alas, the platform relies on a handful of backend IT platforms that aren't free, and my operating costs will go up as more folks subscribe. Eventually I may need to charge a modest subscription fee to cover those costs. I'm thinking $2/button/month will be more than enough, but I'll know better once I see how the subscriber base grows.  Until then, however, clicks are free!
+</blockquote>
+<h4><i>What data does the service collect, where is it stored, and what are you doing with it?</i></h4>
+<blockquote>
+Drop-Me-A-Click collects two types of data: configuration data and transaction data. Configuration data consists of your account password as well as place names and contacts associated with your buttons.  Your password is saved encrypted on the webserver, which is hosted in the AWS cloud. Button settings are stored within <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-PTP.html" target="_blank">AWS IoT 1-Click</a>. Transaction data consists of activity logs and emails that are generated when you make button clicks. Logs are retained within <a href="https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-cloudwatch.html" target="_blank">AWS IoT 1-Click</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-monitoring.html" target="_blank">AWS Lambda</a>.  The purpose of these logs is to monitor system health, and they don't contain any personal information. Emails triggered by the service are sent via Gmail.  I’ve configured the system to auto-delete emails as soon as they are delivered, so none are retained. None of the data associated with Drop-Me-A-Click is shared with any outside party; I am the only one with access.  Lastly, AWS and Google implement a robust set of information security practices, so the possibility of any unauthorized data disclosure from their platforms is highly unlikely.
+</blockquote>
+<h4><i>How do I cancel the service?</i></h4>
+<blockquote>
+First, delete <i class="icon-trash"></i> all of the buttons attached to your account, then delete your account.
+</blockquote>
+<h4><i>How do I enter contacts for my button?</i></h4>
+<blockquote>
+Click on Settings, then edit <i class="icon-pencil"></i> the contacts for your button.  You can enter up to eight email addresses (these can be SMS address too, see below), and three webhooks.
+</blockquote>
+<h4><i>I can enter email addresses on the button settings form, but not phone numbers.  You said the service can send text messages too.  How can I do this?</i></h4>
+<blockquote>
+You can send text messages to phones over email using what’s called an “SMS gateway”.  Just Google <a href="https://www.google.com/search?q=sms+gateways">“SMS gateways”</a> and you’ll find what gateway to use for your phone’s wireless carrier.  In general, to send a text message to your phone, just specfy the email address as <i>phone-number@sms-gateway</i>, e.g. 4105551212@txt.att.net for AT&T, or 4105551212@vtext.com for Verizon. It’s that easy.  In most cases these gateways will deliver text messages almost as fast as if you sent them directly from another phone. <i>(P.S. If the SMS gateways aren't working well, try the MMS ones instead: @mms.att.net for AT&T, @vzwpix.com for Verizon)</i>
+</blockquote>
+<h4><i>Can I add more buttons to my account after I've subscribed? Is there a limit on the number of buttons I can add?</i></h4>
+<blockquote>
+Yes, you can add as many buttons as you like.  Simply click "Add" on the Settings page, after entering a name for your button.  When you add a button the system will walk you through the same sequence of steps to "claim" your new button as you followed when you inititally subscribed.  Once your button has been added, you can edit <i class="icon-pencil"></i> the email addresses and webhooks associated with it.  Alternatively, you can copy these settings from another button.
+</blockquote>
+<h4><i>How do I define my favorite places so I can map cell towers to these?</i></h4>
+<blockquote>
+Click on Settings, enter a place name (don’t use any spaces or punctuation marks), and click Add.  If you already know some cell id(s) that are nearby, you can fill those in on the next page.  Otherwise, wait until you get a click from that spot, copy the cell id from the message, then edit <i class="icon-pencil"></i> the place from the Settings page, add the cell id to the list, and click Update.
+</blockquote>
+<h4><i>Why does the service allow me to associate multiple cell ids for the same place? Doesn't my button always connect to the same tower when it's in the same place?</i></h4>
+<blockquote>
+Your button will connect to the cell tower that has the best signal strength.  The closest tower isn’t necessarily the one that will have the best signal, depending on a variety of factors (obstacles, weather conditions, etc.).  So you may notice over time that a collection of cell towers are serving your favorite place.
+</blockquote>
+<h4><i>What are button webhooks, and how do I use them?</i></h4>
+<blockquote>
+Webhooks are simply calls to websites that cause other actions to be triggered when your button is clicked.  I added this feature for two sets of folks: first, for any IT geeks who may want to integrate Drop-Me-A-Click with another application they’re developing; and second, for all the rest of us who’d like our button clicks to talk to Alexa (more on that below).  Each webhook  must be a complete and properly formatted URL  starting with  http:// or https://.  Webhooks are invoked using the HTTP POST method without supplying any request data.  The following substitution variables are made available so that click-specific event data can be passed as part of the URL (note that variable names are case sensitive and must be enclosed in braces within the URL):
+<table>
+<tr><td>{ClickType}</td><td>SINGLE, DOUBLE, LONG</td></tr>
+<tr><td>{ClickTotal}</td><td>Total # of times the button was clicked in its lifetime (decimal value)</td></tr>
+<tr><td>{Battery}</td><td>% battery remaining</td></tr>
+<tr><td>{CellId}</td><td>Cell id (decimal value)</td></tr>
+<tr><td>{Who}</td><td>Button name as specified within the app</td></tr>
+<tr><td>{When}</td><td>Datetime when button was clicked (GMT, ISO format)</td></tr>
+<tr><td>{Where}</td><td>Place name where button was clicked, or if no match for the cell id, the full street address of the cell tower</td></tr>
+<tr><td>{Notification}</td><td>A composite message defined as: “{ClickType} click from {Who} on {When}: {Where}”</td></tr>
+</table>
+</blockquote>
+<h4><i>How do I send notifications to Alexa when buttons are clicked?</i></h4>
+<blockquote>
+Follow the instructions on the <a href="https://www.thomptronics.com/about/notify-me" target="_blank">Notify Me website</a> in order to obtain an access code for your Alexa account.  The code is a *very long* string that starts with amzn1.ask.account, or something similar.  Next, edit <i class="icon-pencil"></i> the settings for your button and enter the following webhook (replace YOUR-ACCESS-CODE with the string you received):
+<p>
+<pre>https://api.notifymyecho.com/v1/NotifyMe?notification={Notification}&accessCode=YOUR-ACCESS-CODE</pre>
+</p>
+That’s it!  Now whenever your button is clicked all of the Alexa devices tied to your account will play a short tone indicating a notification has been posted.  You can retrieve it by saying: "Alexa, play notifications"
+</blockquote>
+<h4><i>How do I change my password?</i></h4>
+<blockquote>
+Open Settings, edit <i class="icon-pencil"></i> your account, complete the new password form, and click Change.  You'll be
+prompted to login with your new password.
+</blockquote>
+<h4><i>I forgot my password.  How do I reset it?</i></h4>
+<blockquote>
+Open Settings to access the login screen, enter your email address, and click Reset Password. A new password will be emailed to you.
+</blockquote>
+<h4><i>One of my buttons appears to be broken.  How do I replace it?</i></h4>
+<blockquote>
+You can associate a new Sercomm device with an existing button by clicking "Add" on the Settings page.  Simply specify the same name as your current button, and then populate the serial number for your new device. The new device will replace the current one stored in the system, and all of the other button settings will remain the same.
+</blockquote>
+<h4><i>Can you tell us a little about yourself?</i></h4>
+<blockquote>
+You'll find me on <a href="https://www.linkedin.com/in/gerry-mckenna-a90a37219/" target="_blank">LinkedIn</a>.  Hope you find Drop-Me-A-Click useful!
+</blockquote>
+<p>&nbsp;</p>
+</div>
+<!--#include virtual="/sercomm/footer.html" -->

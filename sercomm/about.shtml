@@ -1,0 +1,21 @@
+<!--#include virtual="/sercomm/header.html" -->
+<div style="width: 1000px;">
+<h2>The story behind Drop-Me-A-Click...</h2>
+<p>
+<div style="float:left; margin-right:10px; text-align: center;">
+<a href="https://iotbutton.sercomm.us/" target="_blank"><img src="/sercomm/images/sercomm.png"></a><br>
+<a href="https://iotbutton.sercomm.us/" target="_blank" class="button pseudo"><b>Sercomm IoT Button</b></a>
+</div>
+In 2018 Amazon Web Services introduced a service called <a href="https://aws.amazon.com/iot-1-click/" target="_blank">AWS IoT 1-Click</a>.  The service enables users to send very basic notifications over the cell phone network using a <a href="https://iotbutton.sercomm.us/" target="_blank">small button available for $40 from Sercomm Corporation</a>.  Essentially each click of the button triggers a text message or email to a particular recipient.  Great stuff!  Amazon’s out-of-the-box solution, however, does not provide the button’s location, which I thought would make the service a lot more useful.  After a bit of digging I discovered that the button does in fact report the cell tower it connects with whenever it sends out a button click, and it’s a simple matter to look up the tower id in a database to find its street address (I’m using a <a href="https://unwiredlabs.com/" target="_blank">cell tower database provided by Unwired Labs</a>).  Awesome! It’s not Google Maps, but it does the job! &#128077;
+</p>
+<p>
+<div style="float:right; margin-left:10px; text-align: center;">
+<i>Click on the pic to see how the app works&hellip;</i><br>
+<a href="/sercomm/demo.shtml"><img src="/sercomm/images/EPA-small.png"></a><br>
+<a href="https://unwiredlabs.com/" target="_blank" class="button pseudo">
+<b>Location powered by Unwired Labs</b></a>
+</div>
+A few years ago I purchased Sercomm buttons for all of my family members, and wrote an app that allows us to notify each other of our whereabouts via text messages and email. We leave a button in our cars or carry one in our backpacks, and click it whenever we arrive at different destinations throughout the day. The app allows cell tower ids to be mapped to familiar places we visit, e.g. “work”, “school”, “gym”, “church”, “home”, etc., so there’s no need to report the full tower address when we frequent those locations.  When we’re venturing out of town on a road trip, however, the app reports the complete address of the towers so it’s possible &ndash; and fun! &ndash; to report/track trip progress by clicking on the button as we go.  Lastly, the app also allows <a href="https://www.thomptronics.com/about/notify-me" target="_blank">Amazon Alexa devices to be aware of button clicks using a skill called “Notify Me”</a>.  With the help of Notify Me button clicks can trigger real time alerts on Alexa, and can be played by retrieving notifications.  Our family still uses the app regularly, so it’s proven the test of time.  My goal now is to create a public version of the app so others can give it a try and see whether it’s useful for them too.  For now I'm offering the service free of charge, but depending on the size of the subscriber base, I may eventually need to charge a fee (a couple dollars per month or so) to pay for the backend IT platforms.  Please don't hesitate to <a href="/sercomm/contact.shtml">contact me</a> if you have any questions.  Welcome to Drop-Me-A-Click!
+</p>
+</div>
+<!--#include virtual="/sercomm/footer.html" -->

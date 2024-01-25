@@ -1,0 +1,27 @@
+<!--#include virtual="/sercomm/header.html" -->
+<div style="width: 850px;">
+<p>
+<span style="font-style: normal; font-weight: bold; font-size: 200%">Drop-Me-A-Click</span><br>
+<span style="font-style: italic; font-weight: normal; font-size: 100%">Report your location in real time via text, email, or Alexa with the click of a button... no cell phone required!</span>
+</p>
+<p>
+<div style="float:left; margin-right:20px; text-align: center;">
+<a href="/sercomm/demo.shtml"><img src="/sercomm/images/golfing.png"></a><br>
+<i>Click on the pic to see how the app works&hellip;</i><br>
+</div>
+<div>
+	<br>
+	<i class="icon-location"></i>&nbsp;<a href="https://iotbutton.sercomm.us/" target="_blank">Purchase Sercomm button</a><br>
+	<i class="icon-location"></i>&nbsp;<a href="/sercomm/subscribe.cgi">Subscribe to Drop-Me-A-Click</a><br>
+	<i class="icon-location"></i>&nbsp;<a href="/sercomm/settings.cgi">Configure your contacts</a><br>
+	<i class="icon-location"></i>&nbsp;<a href="/sercomm/">Start clicking!</a><br>
+	<i class="icon-location"></i>&nbsp;<a href="/sercomm/settings.cgi">Define your favorite places</a><br>
+	<i class="icon-location"></i>&nbsp;<a href="/sercomm/settings.cgi">Map cell towers (optional)</a><br>
+	<i class="icon-location"></i>&nbsp;<a href="/sercomm/">Repeat!</a><br>
+</div>
+</p>
+<p style="font-size: 75%;">
+Updated: May, 2023
+</p>
+</div>
+<!--#include virtual="/sercomm/footer.html" -->
