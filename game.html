@@ -1,0 +1,106 @@
+<div style="text-align: center; font-style: italic;">
+Here's a little demo to give you a sense of how the service works...  Drag the button below to different locations within the scene, then double click it.  The system will report the cell tower (depicted by the colored squares) the button connects with, together with the tower's geographic location. The actual service allows you to define familiar names for those tower locations, e.g. "School", "Home", etc., and will notify you about button clicks in real time.</i><br>
+
+<a href="https://unwiredlabs.com/" target="_blank" class="button pseudo"><b>Cell tower location services powered by Unwired Labs</b></a>
+
+<canvas id="canvas" img="EPA.png" width=1000 height=633></canvas>
+</div>
+
+<script>
+var star_img = new Image();
+var city_img = new Image();
+var isDraggable = false;
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+star_img.src='./images/blackbutton.png';
+city_img.src='./images/EPA.png';
+var currentX = canvas.width/2;
+var currentY = canvas.height/2;
+var whoami = "SORACOM BUTTON";
+var closest = 0;
+var towermap = new Map();
+towermap.set(1, [30, 30, "Camper Trail, Rural County"]);
+towermap.set(2, [660, 170, "Main Street, Downtown"]);
+towermap.set(3, [140, 400, "Airport Loop, West End"]);
+towermap.set(4, [850, 0, "Utility Road, East Side"]);
+towermap.set(5, [400, 380, "School Lane, Residential Community"]);
+towermap.set(6, [840, 240, "Medical Drive, East Side"]);
+towermap.set(7, [625, 465, "Dockside Way, Southport"]);
+towermap.set(8, [340, 200, "Fountain Square, Downtown"]);
+towermap.set(9, [460, 75, "Farm Road, Rural County"]);
+
+var towerpic = new Map();
+for (let n = 1; n <= towermap.size; ++n) {
+  towerpic.set(n, new Image());
+  towerpic.get(n).src = './images/' + n.toString() + '.png'
+}
+
+function _DrawImage() {
+  context.fillStyle = "#FFFFFF";
+  context.fillRect(0,0,canvas.width,canvas.height);
+  context.drawImage(city_img, 0, 0);
+  for (let n = 1; n <= towerpic.size; ++n) {
+    let t = towermap.get(n);
+    let p = towerpic.get(n);
+    context.drawImage(p, t[0], t[1]);
+  }
+  let x = currentX-(star_img.width/2);
+  let y = currentY-(star_img.height/2);
+  context.drawImage(star_img, x, y);
+}
+
+canvas.onmousedown = function(e) {
+
+  let mouseX = e.pageX - this.offsetLeft;
+  let mouseY = e.pageY - this.offsetTop;
+
+  if (mouseX >= (currentX - star_img.width/2) &&
+      mouseX <= (currentX + star_img.width/2) &&
+      mouseY >= (currentY - star_img.height/2) &&
+      mouseY <= (currentY + star_img.height/2)) {
+    isDraggable = true;
+    //currentX = mouseX;
+    //currentY = mouseY;
+  }
+};
+
+canvas.onmousemove = function(e) {
+
+  if (isDraggable) {
+    currentX = e.pageX - this.offsetLeft;
+    currentY = e.pageY - this.offsetTop;
+  }
+  _DrawImage();
+};
+
+canvas.onmouseup = function(e) {
+  isDraggable = false;
+  let mindist = 0, dist = 0;
+  closest = 0;
+  for (let n = 1; n <= towerpic.size; ++n) {
+    let t = towermap.get(n);
+    let p = towerpic.get(n);
+    dist = (currentX-t[0]-p.width/2)**2 + (currentY-t[1]-p.height/2)**2;
+    if (closest == 0 || dist < mindist)
+      mindist = dist, closest = n;
+  }
+};
+
+canvas.onmouseout = function(e) {
+  isDraggable = false;
+};
+
+canvas.ontouchstart = canvas.onmousedown;
+canvas.ontouchmove = canvas.onmousemove;
+canvas.ontouchend = canvas.onmouseup;
+
+canvas.ondblclick = function() {
+  let t = towermap.get(closest);
+  window.alert('DOUBLE click from ' + whoami + ' on ' + (new Date().toLocaleString()) + ': Tower #' + +closest + ': ' + t[2]);
+};
+
+window.onload = function (e) {
+  _DrawImage();
+}
+
+</script>

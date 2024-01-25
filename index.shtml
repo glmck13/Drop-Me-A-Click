@@ -1,0 +1,9 @@
+<!--#include virtual="/header.html" -->
+<h1>Drop-Me-A-Click</h1>
+<div style="font-style: italic; font-weight: normal;">Report your location in real time via text, email, or Alexa with the click of an <a href="https://www.soracom.io/iot-button/" target="_blank">IoT button from Soracom</a>... no cell phone required!  Click on <a href="/settings.cgi"><i class="icon-cog"></i> Settings</a> to get started.
+</div>
+
+<hr>
+<!--#include virtual="/game.html" -->
+
+<!--#include virtual="/footer.html" -->

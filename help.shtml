@@ -1,0 +1,69 @@
+<!--#include virtual="/header.html" -->
+<div style="width: 1000px;">
+
+<h2>Help Desk</h2>
+
+<h4><i>Soracom’s platform already interfaces to products like IFTTT that can send an email when a button is clicked, so what’s different about this service?</i></h4>
+<blockquote>
+	The main difference is that Drop-Me-A-Click includes the cell tower location within its notifications, while also providing a mechanism to forward these notifications to multiple backend systems at the same time. Soracom events do not include cell tower data; applications like Drop-Me-A-Click must make additional API calls to retrieve the tower data and map its location.  Drop-Me-A-Click offers a webhook that implements this functionality.  The webhook is callable from <a href="https://www.soracom.io/products/beam/" target="_blank">Soracom Beam</a>, just like <a href="https://ifttt.com/" target="_blank">IFTTT</a>.
+</blockquote>
+
+<h4><i>How do I sign up for the service?</i></h4>
+<blockquote>
+You don’t actually subscribe to Drop-Me-A-Click.  The service is merely an adjunct to Soracom’s platform.  To get started, purchase a <a href="https://www.soracom.io/iot-button/" target="_blank">Soracom IoT button</a>, and register it in their system.  Then login to Drop-Me-A-Click using your Soracom credentials, and enable any buttons for which you’d like to use the Drop-Me-A-Click webhook.  That’s it! Drop-Me-A-Click takes care of configuring everything within Soracom so your button clicks are sent its way.
+</blockquote>
+
+<h4><i>How do I change my password?</i></h4>
+<blockquote>
+Drop-Me-A-Click does not have a password.  It makes use of your Soracom credentials.  If you need to change your Soracom password, follow the instructions posted on the <a href="https://support.soracom.io/" target="_blank">Soracom support page</a>
+</blockquote>
+
+<h4><i>How do I cancel the service?</i></h4>
+<blockquote>
+Login to Drop-Me-A-Click, uncheck the "Enable" box for all of your buttons, then click "Update". Once you’re finished, Drop-Me-A-Click will automatically delete any configuration data it stores in Soracom.
+</blockquote>
+
+<h4><i>How much does the service cost?</i></h4>
+<blockquote>
+Drop-Me-A-Click is free!  You only pay for the Soracom button.
+</blockquote>
+
+<h4><i>What data does the service collect, where is it stored, and what are you doing with it?</i></h4>
+<blockquote>
+Drop-Me-A-Click only uses data saved within Soracom’s platform; the service neither collects nor retains any data on its own. Configuration settings for the service
+are saved as "tags" associated with Soracom SIMs and groups.
+</blockquote>
+
+<h4><i>How do you provision the service to send text messages?</i></h4>
+<blockquote>
+You can send text messages to phones over email using what’s called an "SMS gateway". Just Google "SMS gateways" and you’ll find what gateway to use for your phone’s wireless carrier. In general, to send a text message to your phone, just specify the email address as phone-number@sms-gateway, e.g. 4105551212@txt.att.net for AT&T, or 4105551212@vtext.com for Verizon. It’s that easy. In most cases these gateways will deliver text messages almost as fast as if you sent them directly from another phone. If the SMS gateways aren't working well, try the MMS ones instead: e.g. @mms.att.net for AT&T, @vzwpix.com for Verizon.
+</blockquote>
+
+<h4><i>How do I find the cell ids for my favorite locations?</i></h4>
+<blockquote>
+The easiest way to do this is by sending button clicks from those spots, and extracting the cell tower numbers included in the Drop-Me-A-Click notifications. In densely populated areas you'll likely notice that a collection of cell towers will serve a single location.  Moreover, the closet tower graphically isn’t necessarily the one your button will connect to.  Your button chooses the tower with the best signal strength at that moment you click, and factors such as weather, obstacles, etc. can all affect signal quality.
+</blockquote>
+
+<h4><i>What are button webhooks, and how do I use them?</i></h4>
+<blockquote>
+Webhooks are simply calls to websites that trigger additional actions when your button is clicked. A particular webhook I like to use is one that routes button click notifications to Alexa devices (more on that below). Each webhook must be a complete and properly formatted URL starting with http:// or https://. Webhooks are invoked using the HTTP POST method without supplying any request data. The following substitution variables are made available so that click-specific event data can be passed as part of the URL (note that the variable names below are case sensitive, and must be enclosed in braces within the URL):
+<table>
+<tr><td>{ClickType}</td><td>SINGLE, DOUBLE, LONG</td></tr>
+<tr><td>{CellId}</td><td>Cell id (decimal value)</td></tr>
+<tr><td>{Who}</td><td>Button name as specified within the app</td></tr>
+<tr><td>{When}</td><td>Datetime when button was clicked (GMT, ISO format)</td></tr>
+<tr><td>{Where}</td><td>Place name where button was clicked, or if no match for the cell id, the full street address of the cell tower</td></tr>
+<tr><td>{Notification}</td><td>A composite message defined as: "{ClickType} click from {Who} on {When}: {Where}"</td></tr>
+</table>
+</blockquote>
+
+<h4><i>How do I send notifications to Alexa when buttons are clicked?</i></h4>
+<blockquote>
+Follow the instructions on the <a href="https://www.thomptronics.com/about/notify-me" target="_blank">Notify Me website</a> in order to obtain an access code for your Alexa account. The code is a *very long* string that starts with amzn1.ask.account, or something similar. Next, edit  the settings for your button and enter the following webhook (replace YOUR-ACCESS-CODE with the string you received):
+https://api.notifymyecho.com/v1/NotifyMe?notification={Notification}&accessCode=YOUR-ACCESS-CODE
+That’s it! Now whenever your button is clicked all of the Alexa devices tied to your account will play a short tone indicating a notification has been posted. You can retrieve it by saying: "Alexa, play notifications"
+</blockquote>
+
+<p>&nbsp;</p>
+</div>
+<!--#include virtual="/footer.html" -->

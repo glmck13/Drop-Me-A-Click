@@ -1,0 +1,9 @@
+SORACOM_URL = "https://g.api.soracom.io/v1"
+SORACOM_GRPNAME = "drop-me-a-click"
+GMAIL_SMTP = "smtp.gmail.com"
+GMAIL_PORT = 465
+GMAIL_KEY = ""
+GMAIL_FROM = "dropmeaclick@gmail.com"
+GMAIL_TO = ""
+UNWIRED_URL = "https://us1.unwiredlabs.com/v2/process"
+UNWIRED_TOKEN = ""
