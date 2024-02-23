@@ -21,6 +21,9 @@ from getenv import *
 import urllib3
 urllib3.disable_warnings()
 
+# Disable IPv6 for Soracom API
+requests.packages.urllib3.util.connection.HAS_IPV6 = False
+
 print("Content-Type: text/plain\n")
 
 SORACOM_KEYS = SORACOM_KEYS.split(',')
