@@ -5,6 +5,9 @@ import requests
 from urllib.parse import parse_qs
 from getenv import *
 
+# Disable IPv6 for Soracom API
+requests.packages.urllib3.util.connection.HAS_IPV6 = False
+
 def insert_html_header():
     with open("header.html") as f:
         print(f.read())
