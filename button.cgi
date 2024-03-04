@@ -101,7 +101,7 @@ for item in contacts:
     elif not item[0]:
         continue
     else:
-        recipients.append(item[0])
+        recipients.extend(item[0].split(','))
 
 if recipients:
     eml = EmailMessage()
