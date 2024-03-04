@@ -57,9 +57,9 @@ last_session = rsp[0]
 
 tags = sim["tags"]
 name = tags.get("name", "Unknown")
-cellids = tags.get("cellids", "").replace(',', ' ').split()
-contacts = tags.get("contacts", "").replace(',', ' ').split()
-webhooks = tags.get("webhooks", "").replace(',', ' ').split()
+cellids = tags.get("cellids", "").split()
+contacts = tags.get("contacts", "").split()
+webhooks = tags.get("webhooks", "").split()
 tower = last_session["cell"]
 
 ClickType = event["detect_type"].upper()
