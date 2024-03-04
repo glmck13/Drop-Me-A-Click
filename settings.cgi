@@ -192,8 +192,8 @@ while not done:
             <td valign="middle"><table>
             <tr><td>Status</td><td><label><input type="checkbox" name="enable-{n}" {checked}><span class="checkable">Enabled for Drop-Me-A-Click</span></label></td></tr>
             <tr><td>Button Name</td><td><input type="text" name="name-{n}" value="{button}" size=60></td></tr>
-            <tr><td>CellId Mapping</td><td><textarea name="cellids-{n}" placeholder="Format = tower#:name, ... For example: 17924112:SCHOOL, 20334097:WORK">{cellids}</textarea></td></tr>
-            <tr><td>Email/SMS Contacts</td><td><textarea name="contacts-{n}" placeholder="Format = [click-type:]address, ... For example: user@mail.com, 6105551212@txt.sms.net, DOUBLE:myid@cloud.io">{contacts}</textarea></td></tr>
+            <tr><td>CellId Mapping</td><td><textarea name="cellids-{n}" placeholder="Format = tower#:name ... For example: 17924112:SCHOOL 20334097:WORK">{cellids}</textarea></td></tr>
+            <tr><td>Email/SMS Contacts</td><td><textarea name="contacts-{n}" placeholder="Format = [click-type:]address[,address] ... For example: user@mail.com DOUBLE:6105551212@txt.sms.net,myid@cloud.io">{contacts}</textarea></td></tr>
             <tr><td>Webhooks</td><td><textarea name="webhooks-{n}" placeholder="Format = [click-type:]https://...">{webhooks}</textarea></td></tr>
             </table></td>
             </tr>
