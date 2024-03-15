@@ -171,8 +171,10 @@ while not done:
 
     if Action == "Summary":
         cleanup = True
-        print('<h2>Buttons</h2><hr>')
-        print('<form method="POST">')
+        print('''
+        <form method="POST">
+        <style> ::placeholder { color: grey; opacity: 0.50; } </style>
+        ''')
         for n, s in enumerate(sims):
             if s["groupId"] and s["groupId"] == groupId:
                 checked = "checked"
@@ -185,21 +187,16 @@ while not done:
             contacts = s["tags"].get("contacts", "")
             webhooks = s["tags"].get("webhooks", "")
             print('''
+            <hr><br>
             <input type="hidden" name="sim-{n}" value={id}>
-            <table>
-            <tr>
-            <td valign="middle">SIM: {id}</td>
-            <td valign="middle"><table>
-            <tr><td>Status</td><td><label><input type="checkbox" name="enable-{n}" {checked}><span class="checkable">Enabled for Drop-Me-A-Click</span></label></td></tr>
-            <tr><td>Button Name</td><td><input type="text" name="name-{n}" value="{button}" size=60></td></tr>
-            <tr><td>CellId Mapping</td><td><textarea name="cellids-{n}" placeholder="Format = tower#:name ... For example: 17924112:SCHOOL 20334097:WORK">{cellids}</textarea></td></tr>
-            <tr><td>Email/SMS Contacts</td><td><textarea name="contacts-{n}" placeholder="Format = [click-type:]address[,address] ... For example: user@mail.com DOUBLE:6105551212@txt.sms.net,myid@cloud.io">{contacts}</textarea></td></tr>
-            <tr><td>Webhooks</td><td><textarea name="webhooks-{n}" placeholder="Format = [click-type:]https://...">{webhooks}</textarea></td></tr>
-            </table></td>
-            </tr>
-            </table>
-            <hr>
+            <b>SIM</b>: {id}: <label><input type="checkbox" name="enable-{n}" {checked}><span class="checkable">Enabled for Drop-Me-A-Click</span></label><br><br>
+            <b>Button Name</b><input type="text" name="name-{n}" value="{button}" size=80>
+            <b>CellId Names</b><textarea name="cellids-{n}" placeholder="Format = tower#:name ... For example: 17924112:SCHOOL 20334097:WORK">{cellids}</textarea>
+            <b>Email/SMS Contacts</b><textarea name="contacts-{n}" placeholder="Format = [click-type:]address[,address] ... For example: user@mail.com DOUBLE:6105551212@txt.sms.net,myid@cloud.io">{contacts}</textarea>
+            <b>Webhooks</b><textarea name="webhooks-{n}" placeholder="Format = [click-type:]https://...">{webhooks}</textarea>
+            <br><br>
             '''.format(n=n, checked=checked, button=button, id=id, contacts=contacts, cellids=cellids, webhooks=webhooks))
+        print('<hr>')
 
         if cleanup:
             delete_group()

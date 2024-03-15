@@ -1,13 +1,14 @@
-<div class="half">
 <p style="font-style: italic; font-size: 0.8em;">Use your Soracom credentials to login</p>
 <form method="POST">
+	<div class="half">
+	<style> ::placeholder { color: grey; opacity: 0.50; } </style>
 	<input type="email" name="Email" placeholder="Enter email address" />
 	<input type="password" name="Password" placeholder="Enter password" />
 	To continue, move slider to the right <span style="font-size: 200%;">&rarr;</span>
 	<input type="range" min="0" max="100" step="10" id="slider" value="0" />
 	<div id="output"> </div>
+	</div>
 </form>
-</div>
 <script>
 	let output = document.getElementById("output");
 	let input = document.getElementById("slider");
