@@ -82,10 +82,9 @@ def make_group():
 
 HTTP_HOST = "https://" + os.getenv("HTTP_HOST", "")
 CGI_FILE = HTTP_HOST + os.getenv("REQUEST_URI", "").split('?')[0]
-if os.getenv("REQUEST_METHOD", "") == "GET":
-    QUERY_STRING = os.getenv("QUERY_STRING", "")
-else:
-    QUERY_STRING = sys.stdin.read()
+QUERY_STRING = os.getenv("QUERY_STRING", "")
+if not QUERY_STRING and os.getenv("REQUEST_METHOD", "") != "GET":
+    QUERY_STRING = sys.stdin.read().strip()
 
 Fields = parse_qs(QUERY_STRING)
 Action = Fields.get("Action", [""])[0]
@@ -190,10 +189,10 @@ while not done:
             <hr><br>
             <input type="hidden" name="sim-{n}" value={id}>
             <b>SIM</b>: {id}: <label><input type="checkbox" name="enable-{n}" {checked}><span class="checkable">Enabled for Drop-Me-A-Click</span></label><br><br>
-            <b>Button Name</b><input type="text" name="name-{n}" value="{button}" size=80>
-            <b>CellId Names</b><textarea name="cellids-{n}" placeholder="Format = tower#:name ... For example: 17924112:SCHOOL 20334097:WORK">{cellids}</textarea>
-            <b>Email/SMS Contacts</b><textarea name="contacts-{n}" placeholder="Format = [click-type:]address[,address] ... For example: user@mail.com DOUBLE:6105551212@txt.sms.net,myid@cloud.io">{contacts}</textarea>
-            <b>Webhooks</b><textarea name="webhooks-{n}" placeholder="Format = [click-type:]https://...">{webhooks}</textarea>
+            <b>Button</b><input type="text" name="name-{n}" value="{button}" size=80>
+            <b>CellIds</b><textarea name="cellids-{n}" placeholder="Format=name:tower[,tower]... e.g. SCHOOL:17924112,11354373 WORK:20334097">{cellids}</textarea>
+            <b>Contacts</b><textarea name="contacts-{n}" placeholder="Format=[click-type:]address[,address]... e.g. user@mail.com DOUBLE:6105551212@txt.sms.net,myid@cloud.io">{contacts}</textarea>
+            <b>Webhooks</b><textarea name="webhooks-{n}" placeholder="Format=[click-type:]https://...">{webhooks}</textarea>
             <br><br>
             '''.format(n=n, checked=checked, button=button, id=id, contacts=contacts, cellids=cellids, webhooks=webhooks))
         print('<hr>')

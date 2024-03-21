@@ -23,11 +23,10 @@ def insert_html_footer():
 
 HTTP_HOST = "https://" + os.getenv("HTTP_HOST", "")
 CGI_FILE = HTTP_HOST + os.getenv("REQUEST_URI", "").split('?')[0]
+QUERY_STRING = os.getenv("QUERY_STRING", "")
+if not QUERY_STRING and os.getenv("REQUEST_METHOD", "") != "GET":
+    QUERY_STRING = sys.stdin.read().strip()
 
-if os.getenv("REQUEST_METHOD", "") == "GET":
-    QUERY_STRING = os.getenv("QUERY_STRING", "")
-else:
-    QUERY_STRING = sys.stdin.read()
 Fields = parse_qs(QUERY_STRING)
 Contact = Fields.get("Contact", [""])[0]
 Email = Fields.get("Email", [""])[0]

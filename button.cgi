@@ -74,10 +74,9 @@ LacId = tower.get("tac", tower.get("lac", ""))
 
 cid = str(CellId)
 for item in cellids:
-    item += ':'
-    item = item.split(':')
-    if cid == item[0]:
-        Where = item[1]
+    item = (item + ':').split(':')
+    if cid in item[1].split(','):
+        Where = item[0]
         break
 else:
     try:
@@ -86,7 +85,7 @@ else:
     except:
         Where = "Unknown"
 
-Notification = "{} click from {} on {}: {}".format(ClickType, Who, datetime.strptime(When, "%Y-%m-%d %H:%M:%S").strftime("%A, %B %-d at %-I:%M %p"), Where)
+Notification = "{ClickType} click from {Who} on {When}: CellId {CellId}: {Where}".format(ClickType=ClickType, Who=Who, When=datetime.strptime(When, "%Y-%m-%d %H:%M:%S").strftime("%A, %B %-d at %-I:%M %p"), CellId=CellId, Where=Where)
 Subject = "{ClickType} click from {Who}".format(ClickType=ClickType, Who=Who)
 Body = "CellId {CellId}: {Where}".format(CellId=CellId, Where=Where)
 Message = Subject + ': ' + Body
@@ -129,7 +128,7 @@ for item in webhooks:
         url = item[0]
 
     try:
-        url = url.format(ClickType=ClickType, CellId=CellId, Who=Who, When=When, Where=quote(Where), Notification=quote(Notification))
+        url = url.format(Sim=SORACOM_SIM, ClickType=ClickType, CellId=CellId, Who=Who, When=When, Where=quote(Where), Notification=quote(Notification))
         rsp = requests.post(url, verify=False)
         print(rsp.text, file=sys.stderr)
     except:

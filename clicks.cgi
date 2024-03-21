@@ -26,10 +26,9 @@ def insert_html_login():
 
 HTTP_HOST = "https://" + os.getenv("HTTP_HOST", "")
 CGI_FILE = HTTP_HOST + os.getenv("REQUEST_URI", "").split('?')[0]
-if os.getenv("REQUEST_METHOD", "") == "GET":
-    QUERY_STRING = os.getenv("QUERY_STRING", "")
-else:
-    QUERY_STRING = sys.stdin.read()
+QUERY_STRING = os.getenv("QUERY_STRING", "")
+if not QUERY_STRING and os.getenv("REQUEST_METHOD", "") != "GET":
+    QUERY_STRING = sys.stdin.read().strip()
 
 Fields = parse_qs(QUERY_STRING)
 Action = Fields.get("Action", [""])[0]
