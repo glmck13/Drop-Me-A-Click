@@ -4,6 +4,9 @@ import sys, os, json
 
 SORACOM_SIM = os.getenv("HTTP_X_SORACOM_SIM_ID")
 SORACOM_KEYS = os.getenv("HTTP_X_SORACOM_KEYS")
+SORACOM_BEAM = os.getenv("HTTP_X_SORACOM_BEAM", "-")
+
+print("Content-Type: text/plain\n")
 
 if not SORACOM_SIM or not SORACOM_KEYS:
     exit()
@@ -23,8 +26,6 @@ urllib3.disable_warnings()
 
 # Disable IPv6 for Soracom API
 requests.packages.urllib3.util.connection.HAS_IPV6 = False
-
-print("Content-Type: text/plain\n")
 
 SORACOM_KEYS = SORACOM_KEYS.split(',')
 auth_body = {}
@@ -90,7 +91,8 @@ Subject = "{ClickType} click from {Who}".format(ClickType=ClickType, Who=Who)
 Body = "CellId {CellId}: {Where}".format(CellId=CellId, Where=Where)
 Message = Subject + ': ' + Body
 
-print(event, Who, When, Where, ClickType, CellId, Subject, Body, Message, Notification, sep='\n', file=sys.stderr)
+#print(event, Who, When, Where, ClickType, CellId, Subject, Body, Message, Notification, sep='\n', file=sys.stderr)
+#print("Soracom", SORACOM_BEAM, SORACOM_SIM, SORACOM_KEYS, event, file=sys.stderr)
 
 recipients = []
 for item in contacts:
