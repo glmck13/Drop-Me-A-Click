@@ -63,8 +63,11 @@ contacts = tags.get("contacts", "").split()
 webhooks = tags.get("webhooks", "").split()
 tower = last_session["cell"]
 
-ClickType = event["detect_type"].upper()
-if "LONG" in ClickType:
+ClickType = event.get("detect_type", "").upper()
+if not ClickType:
+    ClickType = "UNDEFINED"
+    print(event, file=sys.stderr)
+elif "LONG" in ClickType:
     ClickType = "LONG"
 else:
     ClickType = ClickType.split()[0]
